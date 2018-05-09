@@ -4,7 +4,9 @@ import {
     Text,
     StyleSheet
 } from 'react-native';
-import { Icon } from 'native-base';
+
+import { Container, Content, Icon } from 'native-base';
+import CardComponent from '../CardComponent';
 
 class HomeTab extends Component {
     
@@ -13,14 +15,16 @@ class HomeTab extends Component {
             <Icon name="ios-home" style={{ color: tintColor }} />
         )
     };
-
+ 
     render(){
         return (
-            <View style={styles.container}>
-                <Text>
-                    Home Tab
-                </Text>
-            </View>
+            <Container style={styles.container}>
+                <Content>
+                    <CardComponent imageSource="1" likes="312"/>
+                    <CardComponent imageSource="2" likes="12"/>
+                    <CardComponent imageSource="3" likes="902"/>
+                </Content>
+            </Container>
         )
     }
 }
@@ -29,8 +33,7 @@ export default HomeTab;
 
 const styles = StyleSheet.create({
     container: {
-        flex:1,
-        alignItems: "center",
-        justifyContent: "center"
+        flex: 1,
+        backgroundColor: 'white'
     }
 })
