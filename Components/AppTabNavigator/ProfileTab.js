@@ -3,10 +3,24 @@ import {
     View,
     Text,
     StyleSheet,
-    Image
+    Image, 
+    Dimensions
 } from 'react-native';
 import { Icon, Container, Content, Header, Left, Right, Body, Button } from 'native-base';
 import EntypoIcon from 'react-native-vector-icons/Entypo'
+import CardComponent from '../CardComponent';
+
+var images = [
+    require("../../assets/1.jpg"),
+    require("../../assets/2.jpg"),
+    require("../../assets/3.jpg"),
+    require("../../assets/4.jpeg"),
+    require("../../assets/5.jpg"),
+    require("../../assets/6.jpg"),
+    require("../../assets/7.jpg"),
+]
+
+var { width, height } = Dimensions.get("window")
 
 class ProfileTab extends Component {
     static navigationOptions = {
@@ -14,6 +28,51 @@ class ProfileTab extends Component {
             <Icon name="ios-person" style={{ color: tintColor }} />
         )
     };
+
+    constructor(props){
+        super(props)
+        
+        this.state = {
+            activeIndex: 0
+        }
+    }
+
+    segmentClicked = (index) => {
+        this.setState({
+            activeIndex: index
+        })
+    }
+
+    renderSection = () => {
+        if(this.state.activeIndex == 0){
+            return (
+                <View style={{ flexDirection: "row", flexWrap: "wrap" }}>
+                    { this.renderSectionOne() }
+                </View>
+            )
+        }
+        else if(this.state.activeIndex == 1){
+            return(
+                <View>
+                    <CardComponent imageSource = "1" likes = "302" />
+                    <CardComponent imageSource = "2" likes = "12" />
+                    <CardComponent imageSource = "3" likes = "87" />
+                </View>
+            )
+        }
+    }
+
+    renderSectionOne = () => {
+        return images.map((image, index) => {
+            return(
+                <View key={index} style ={[ { width: (width / 3) , height: (width / 3) }, index % 3 !== 0 ? { paddingLeft: 2 }:{paddingLeft: 0 }, { marginBottom: 2 } ]}>
+                    <Image style={{ flex: 1, width: undefined, height: undefined }}
+                        source={image}
+                    />
+                </View>
+            )
+        })
+    }
 
     render(){
         return (
@@ -57,7 +116,7 @@ class ProfileTab extends Component {
                                         <Text>Edit Profile</Text>
                                     </Button>
                                     <Button bordered dark style={{ flex: 1, marginLeft: 5, marginRight: 10, justifyContent: "center", height: 30 }}>
-                                        <Icon name="settings"></Icon>
+                                        <Icon name="settings" style={{ fontSize: 19, paddingTop: -5 }}></Icon>
                                     </Button>
                                 </View>
                             </View>
@@ -68,7 +127,47 @@ class ProfileTab extends Component {
                             <Text>Full Stack Software Developer</Text>
                             <Text>www.leoncat.com</Text>
                         </View>
+                        
+                        <View>
+                            <View style={{ flexDirection: "row", justifyContent: "space-around", borderTopColor: "#eae5e5", borderTopWidth: 1 }}>
+                                <Button transparent
+                                    onPress = {() => this.segmentClicked(0)}
+                                    active = {this.state.activeIndex == 0}
+                                >
+                                    <Icon name="ios-apps-outline"
+                                        style={[this.state.activeIndex == 0 ? {} : { color: "grey" } ]}
+                                    ></Icon>
+                                </Button>
+                                <Button transparent
+                                    onPress = {() => this.segmentClicked(1)}
+                                    active = {this.state.activeIndex == 1}
+                                >
+                                    <Icon name="ios-list-outline"
+                                        style={[this.state.activeIndex == 1 ? {} : { color: "grey" } ]}
+                                    ></Icon>
+                                </Button>
+                                <Button transparent
+                                    onPress = {() => this.segmentClicked(2)}
+                                    active = {this.state.activeIndex == 2}
+                                >
+                                    <Icon name="ios-people-outline"
+                                        style={[this.state.activeIndex == 2 ? {} : { color: "grey" } ]}
+                                    ></Icon>
+                                </Button>
+                                <Button transparent
+                                    onPress = {() => this.segmentClicked(3)}
+                                    active = {this.state.activeIndex == 3}
+                                >
+                                    <Icon name="ios-bookmark-outline"
+                                        style={[this.state.activeIndex == 3 ? {} : { color: "grey" } ]}
+                                    ></Icon>
+                                </Button>
+                            </View>
+                        </View>
                     </View>
+
+                    {this.renderSection()}
+
                 </Content>
             </Container>
         )

@@ -6,7 +6,9 @@ Instagram Apps Technical Documentation
 1. npm install native-base
 2. npm install react-navigation
 3. npm install (To ensure all the dependency are install)
-
+4. npm install -g react-devtools
+    For debugging purposes. Refer to this link for more info: https://facebook.github.io/react-native/docs/debugging.html
+5. 
  
 
 

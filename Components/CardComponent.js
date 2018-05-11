@@ -56,7 +56,7 @@ class CardComponent extends Component {
                 </CardItem>
                 <CardItem >
                     <Text>
-                        this.props.likes
+                        {this.props.likes} likes
                     </Text>
                 </CardItem>
                 <CardItem>
